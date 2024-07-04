@@ -1,65 +1,172 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Movie Recommendation</title>
+  <title>Movie Recommender</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=10, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!--   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">-->
+  
+  <style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: #D4D7D8; /* Metallic Chic background color */
+      }
+      #page-content {
+        flex: 1;
+      }
+      footer {
+        background-color: #343a40;
+        color: #f8f9fa;
+      }
+      footer .container {
+          padding: 0.25rem 0;
+        }
+      .footer-text {
+        font-size: 16px;
+      }
+      .footer-text .heart {
+        color: red;
+        font-size: 18px;
+      }
+
+      .alert {
+        border-radius: 10px;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+      }
+  
+      .alert h4 {
+        font-weight: bold;
+      }
+  
+      .alert p {
+        font-size: 16px;
+      }
+  
+      .embed-responsive-4by3 {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+  
+      .embed-responsive-item {
+        border: none;
+      }
+
+      .gif-container {
+        border-radius: 5px;  /* Adjust this value to change the curvature of the corners */
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Optional: adds a subtle shadow */
+        margin: 1rem auto;  /* Adds some vertical spacing and centers horizontally */
+      }
+      
+      .gif-frame {
+        border: none;  /* Removes the default iframe border */
+      }
+  </style>
 </head>
-
 <body>
-<!-- Navigation Bar-->
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-    <a href="/" class="navbar-brand">Home</a>
-    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse1">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarCollapse1">
-        <!-- Links -->
-        <div class="navbar-nav">
-            <a href="https://github.com/Viraj-Mathur" class="nav-item nav-link">GitHub</a>
-            <a href="https://www.linkedin.com/in/viraj-mathur-a75580233/" class="nav-item nav-link">About</a>
-        </div>
-    </div>
+<!---------------- Navigation Bar----------->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a href="/" class="navbar-brand">Home</a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse1">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse1">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a href="https://github.com/Viraj-Mathur" class="nav-link">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="https://www.linkedin.com/in/viraj-mathur-a75580233/" class="nav-link">About</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 
-
 <!-------------------------------- Search box--------------------->
-<br>
-<div class="container">
-    <h2 class="font-weight-bold mb-1"><p style="font-family:Tahoma">Movie Recommendation System</h2>
-    <p style="font-style: italic;">Search Any Hollywood Movie And get similar types of movie recommendation.</p>
-<!-- User Input Search Bar -->
-        <form action="/" method="POST">
-            <div class="form-group">
-                <label for="Age">Search Movie:</label>
-                <input type="string" step="1" class="form-control" placeholder="Ex: Iron man, Avatar" id="Age" name="search" required><br>
-            <div class="button-group" style="margin-top:15px;">
-                <button type="submit" name="submit" class="btn btn-danger">Search</button>
-            </div>
-            </div>
-        </form>
+<div class="container text-center">
+  <h2 class="font-weight-bold mb-1" style="font-family: Tahoma;">Movie Recommendation System</h2>
+  <p style="font-style: italic;">Search Any Hollywood Movie and get similar types of movie recommendation.</p>
 </div>
+
+  <!-- User Input Search Bar -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form action="/" method="POST">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="search-icon"><i class="fas fa-search"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Ex: Avengers, Oppenheimer" id="search" name="search" required>
+            <div class="input-group-append">
+              <button type="submit" name="submit" class="btn btn-danger">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 
 <!-------------Error Message show here--------------------->
 <br>
 <div class="container">
-    <div class="alert alert-info" role="alert">
-      <h4 class="alert-heading">Oops!</h4>
-      <p>Look like something went wrong, please try to write a correct movie name or the Movie which you are trying to search is not in our database.</p>
-    </div>
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Oops!</h4>
+    <p>It looks like something went wrong. Please try writing a correct movie name or the movie you are searching for is not in our database.</p>
+  </div>
 
-    <div class="text-center">
-               <!---- Gif Image-->
-        <div class="embed-responsive embed-responsive-4by3">
-          <iframe class="embed-responsive-item" src="/static/confused 404.gif"></iframe>
-        </div>
+  <div class="text-center">
+    <!---- Gif Image-->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="embed-responsive embed-responsive-4by3 gif-container">
+        <iframe class="embed-responsive-item gif-frame" src="/static/not_found.gif"></iframe>
+      </div>
     </div>
+  </div>
+</div>
+  </div>
 </div>
 </body>
+
+<!----------------- Footer --------------------->
+<div id="page-content">
+  <div class="container text-center">
+    <div class="row justify-content-center">
+      <div class="col-md-7">
+        <h1 class="font-weight-light mt-4 text-white"></h1>
+        <p class="lead text-white-50"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<footer id="sticky-footer" class="py-4">
+  <div class="container text-center">
+    <p class="footer-text">
+      Made with <span class="heart"><i class="fas fa-heart"></i></span> by Viraj Mathur
+    </p>
+    <small>&copy; 2024 Viraj Mathur</small>
+  </div>
+</footer>
+
+</body>
+</html>
