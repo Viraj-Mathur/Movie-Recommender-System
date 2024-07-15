@@ -1,5 +1,13 @@
 cosine_sim.npy
-item_similarity_df.pkl
-user_similarity.pkl
 cosine_sim_bollywood.npy
+cosine_sim_bollywood_new.npy
+
+item_similarity_df.pkl
+item_similarity_df_hindi.pkl
+item_similarity_df_hindi_new.pkl
+
+user_similarity.pkl
+user_similarity_hindi_new.pkl
+user_similarity_hindi.pkl
+
 
